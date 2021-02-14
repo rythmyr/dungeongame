@@ -1,7 +1,14 @@
-#include<iostream>
+#include <iostream>
+#include <curses.h>
 
 int main (int argc, char** argv) {
-    std::cout << "Hello, world!" << std::endl;
+    initscr();
+
+    printw("Hello, Curses!");
+    refresh();
+    getch();
+
+    endwin();
 
     return 0;
 }
