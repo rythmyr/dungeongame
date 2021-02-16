@@ -3,6 +3,8 @@
 #include <getopt.h>
 #include <limits.h>
 
+#include "dungeon.h"
+
 struct Options {
     bool help = false;
     long seed = 0;
@@ -67,6 +69,9 @@ int main (int argc, char** argv) {
     } else {
         srand(time(0));
     }
+
+    Dungeon dungeon;
+    dungeon.Generate(50, 50);
 
     initscr();
 
