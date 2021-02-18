@@ -21,6 +21,15 @@ void Dungeon::Generate(int x, int y) {
         this->_map[i] = '.';
     }
 
+    for (; x >= 0; x-- ) {
+        this->SetTile(x, 0, '#');
+        this->SetTile(x, this->_sizeY - 1, '#');
+    }
+    for (; y >= 0; y-- ) {
+        this->SetTile(0, y, '#');
+        this->SetTile(this->_sizeX - 1, y, '#');
+    }
+
     this->SetTile(9, 30, '@');
 }
 
