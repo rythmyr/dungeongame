@@ -75,10 +75,30 @@ int main (int argc, char** argv) {
 
     initscr();
 
-    dungeon.Display();
-    refresh();
-    getch();
+    bool running = true;
 
+    while(running) {
+        dungeon.Display();
+        refresh();
+        char c = getch();
+        switch (c) {
+            case 'q':
+                running = false;
+                break;
+            case 'w':
+                dungeon.MovePlayer(DIR_UP);
+                break;
+            case 'a':
+                dungeon.MovePlayer(DIR_LEFT);
+                break;
+            case 's':
+                dungeon.MovePlayer(DIR_DOWN);
+                break;
+            case 'd':
+                dungeon.MovePlayer(DIR_RIGHT);
+                break;
+        }
+    }
     endwin();
 
     return 0;

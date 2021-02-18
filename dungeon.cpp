@@ -30,6 +30,8 @@ void Dungeon::Generate(int x, int y) {
         this->SetTile(this->_sizeX - 1, y, '#');
     }
 
+    this->_playerX = 9;
+    this->_playerY = 30;
     this->SetTile(9, 30, '@');
 }
 
@@ -67,4 +69,18 @@ char Dungeon::GetTile(int x, int y) {
     }
 
     return this->_map[x*this->_sizeY + y];
+}
+
+int Dungeon::MovePlayer(DirectionPair direction) {
+    int newX = this->_playerX + direction.x;
+    int newY = this->_playerY + direction.y;
+
+    if (this->GetTile(newX, newY) == '.') {
+        //empty space, move there
+        this->SetTile(newX, newY, '@');
+        this->SetTile(this->_playerX, this->_playerY, '.');
+        this->_playerX = newX;
+        this->_playerY = newY;
+    }
+    return 1;
 }
