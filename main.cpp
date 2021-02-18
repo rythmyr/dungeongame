@@ -75,7 +75,7 @@ int main (int argc, char** argv) {
 
     initscr();
 
-    printw("Hello, Curses!");
+    dungeon.Display();
     refresh();
     getch();
 
