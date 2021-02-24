@@ -36,16 +36,16 @@ void Dungeon::Generate(int x, int y) {
     this->_playerX = (rand() % (this->_sizeX - 2)) + 1;
     this->_playerY = (rand() % (this->_sizeY - 2)) + 1;
 
-    //TODO this random number is probably not good
-    this->_monsterCount = (rand() % (this->_sizeX * this->_sizeY) / 30) + 10;
-    this->_monsters = new Monster[this->_monsterCount];
+    //TODO monster spawning, this random count probably isn't great
+    //this->_monsterCount = (rand() % (this->_sizeX * this->_sizeY) / 30) + 10;
+    //this->_monsters = new Monster[this->_monsterCount];
 
-    for (int i = 0; i < this->_monsterCount; i++) {
-        Monster* m = &this->_monsters[i];
-        m->x = (rand() % (this->_sizeX - 2)) + 1;
-        m->y = (rand() % (this->_sizeY - 2)) + 1;
-        m->health = rand() % 15 + 15;
-    }
+    //for (int i = 0; i < this->_monsterCount; i++) {
+    //    Monster* m = &this->_monsters[i];
+    //    m->x = (rand() % (this->_sizeX - 2)) + 1;
+    //    m->y = (rand() % (this->_sizeY - 2)) + 1;
+    //    m->health = rand() % 15 + 15;
+    //}
 }
 
 void Dungeon::Display() {
