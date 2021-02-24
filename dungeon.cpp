@@ -43,9 +43,10 @@ void Dungeon::Generate(int x, int y) {
     this->_monsters = new Monster[this->_monsterCount];
 
     for (int i = 0; i < this->_monsterCount; i++) {
-        this->_monsters[i].x = (rand() % (this->_sizeX - 2)) + 1;
-        this->_monsters[i].y = (rand() % (this->_sizeY - 2)) + 1;
-        this->_monsters[i].health = rand() % 15 + 15;
+        Monster* m = &this->_monsters[i];
+        m->x = (rand() % (this->_sizeX - 2)) + 1;
+        m->y = (rand() % (this->_sizeY - 2)) + 1;
+        m->health = rand() % 15 + 15;
     }
 }
 
@@ -62,9 +63,9 @@ void Dungeon::Display() {
 
     // Display Monsters
     for (int i = 0; i < this->_monsterCount; i++) {
-        Monster m = this->_monsters[i];
-        if (m.health > 0) {
-            mvaddch(m.y, m.x, m.displayChar);
+        Monster* m = &this->_monsters[i];
+        if (m->health > 0) {
+            mvaddch(m->y, m->x, m->displayChar);
         }
     }
 

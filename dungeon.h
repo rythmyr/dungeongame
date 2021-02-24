@@ -14,6 +14,8 @@ struct Monster {
     int y = 0;
     int health = 15;
     char displayChar = 'm';
+    Monster(Monster const &m) = delete;
+    Monster() {};
 };
 
 class Dungeon {
