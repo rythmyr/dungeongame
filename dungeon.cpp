@@ -35,8 +35,6 @@ void Dungeon::Generate(int x, int y) {
 
     this->_playerX = (rand() % (this->_sizeX - 2)) + 1;
     this->_playerY = (rand() % (this->_sizeY - 2)) + 1;
-    this->_playerX += 1;
-    this->_playerY += 1;
 
     //TODO this random number is probably not good
     this->_monsterCount = (rand() % (this->_sizeX * this->_sizeY) / 30) + 10;
@@ -111,8 +109,6 @@ int Dungeon::MovePlayer(DirectionPair direction) {
 
     if (this->GetTile(newX, newY) == '.') {
         //empty space, move there
-        this->SetTile(newX, newY, '@');
-        this->SetTile(this->_playerX, this->_playerY, '.');
         this->_playerX = newX;
         this->_playerY = newY;
     }
