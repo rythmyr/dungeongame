@@ -79,7 +79,6 @@ int main (int argc, char** argv) {
 
     while(running) {
         dungeon.Display();
-        refresh();
         char c = getch();
         switch (c) {
             case 'q':

@@ -10,6 +10,9 @@ Dungeon::~Dungeon() {
     if (this->_map) {
         delete[] this->_map;
     }
+    if (this->_monsters) {
+        delete[] this->_monsters;
+    }
 }
 
 void Dungeon::Generate(int x, int y) {
@@ -30,17 +33,47 @@ void Dungeon::Generate(int x, int y) {
         this->SetTile(this->_sizeX - 1, y, '#');
     }
 
-    this->_playerX = 9;
-    this->_playerY = 30;
-    this->SetTile(9, 30, '@');
+    this->_playerX = (rand() % (this->_sizeX - 2)) + 1;
+    this->_playerY = (rand() % (this->_sizeY - 2)) + 1;
+    this->_playerX += 1;
+    this->_playerY += 1;
+
+    //TODO this random number is probably not good
+    this->_monsterCount = (rand() % (this->_sizeX * this->_sizeY) / 30) + 10;
+    this->_monsters = new Monster[this->_monsterCount];
+
+    for (int i = 0; i < this->_monsterCount; i++) {
+        this->_monsters[i].x = (rand() % (this->_sizeX - 2)) + 1;
+        this->_monsters[i].y = (rand() % (this->_sizeY - 2)) + 1;
+        this->_monsters[i].health = rand() % 15 + 15;
+    }
 }
 
 void Dungeon::Display() {
+    // Display map
     for (int x = 0; x < this->_sizeX; x++) {
         for (int y = 0; y < this->_sizeY; y++) {
             mvaddch(y, x, this->GetTile(x, y));
         }
     }
+
+    // Display Player
+    mvaddch(this->_playerY, this->_playerX, '@');
+
+    // Display Monsters
+    for (int i = 0; i < this->_monsterCount; i++) {
+        Monster m = this->_monsters[i];
+        if (m.health > 0) {
+            mvaddch(m.y, m.x, m.displayChar);
+        }
+    }
+
+    // move cursor out of the way
+    // TODO turn off cursor, if possible
+    move(this->_sizeY, this->_sizeX);
+
+    // actually update screen
+    refresh();
 }
 
 int Dungeon::SetTile(int x, int y, char tile) {

@@ -9,6 +9,13 @@ inline DirectionPair DIR_DOWN = { .x = 0, .y = 1 };
 inline DirectionPair DIR_LEFT = { .x = -1, .y = 0 };
 inline DirectionPair DIR_RIGHT = { .x = 1, .y = 0 };
 
+struct Monster {
+    int x = 0;
+    int y = 0;
+    int health = 15;
+    char displayChar = 'm';
+};
+
 class Dungeon {
 private:
     char* _map = nullptr;
@@ -17,6 +24,9 @@ private:
 
     int _playerX = 0;
     int _playerY = 0;
+
+    Monster* _monsters = nullptr;
+    int _monsterCount = 0;
 public:
     Dungeon();
     ~Dungeon();
