@@ -25,6 +25,23 @@ struct Room {
     int y = 0;
     int w = 0;
     int h = 0;
+
+    inline bool Collides(Room const &other) {
+        // equal means touching, but not overlapping, so return false for collisions in that case
+        return other.x + other.w > this->x
+            && other.x < this->x + this->w
+            && other.y + other.h > this->y
+            && other.y < this->y + this->h;
+    }
+
+    inline bool Collides(Room const &other, int threshold) {
+        Room r;
+        r.x = other.x - threshold;
+        r.y = other.y - threshold;
+        r.w = other.w + (threshold * 2);
+        r.h = other.h + (threshold * 2);
+        return this->Collides(r);
+    }
 };
 
 class Dungeon {

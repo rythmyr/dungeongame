@@ -89,6 +89,21 @@ void Dungeon::Display() {
         mvprintw(this->_sizeY + i + 1, 0, "x: %d, y: %d, w: %d, h: %d", r.x, r.y, r.w, r.h);
     }
 
+    Room r1, r2;
+
+    r1.x = 0;
+    r1.y = 0;
+    r1.w = 6;
+    r1.h = 15;
+
+    r2.x = 10;
+    r2.y = 10;
+    r2.w = 10;
+    r2.h = 10;
+
+    //TODO debug info
+    mvaddch(this->_sizeY, this->_sizeX + 5, r1.Collides(r2, 5) ? 'c' : 'n');
+
     // move cursor out of the way
     // TODO turn off cursor, if possible
     move(this->_sizeY, this->_sizeX);
