@@ -36,6 +36,21 @@ void Dungeon::Generate(int x, int y) {
     this->_playerX = (rand() % (this->_sizeX - 2)) + 1;
     this->_playerY = (rand() % (this->_sizeY - 2)) + 1;
 
+    // try to place rooms 10 times (number is arbitrary)
+    for (int i = 0; i < 10; i ++) {
+        Room room;
+        room.w = rand() % 5 + 3;
+        room.h = rand() % 5 + 3;
+        room.x = (rand() % (this->_sizeX - room.w - 4)) + 2;
+        room.y = (rand() % (this->_sizeY - room.h - 4)) + 2;
+        for (int _x = room.x; _x < room.x + room.w; _x++) {
+            for (int _y = room.y; _y < room.y + room.h; _y++) {
+                this->SetTile(_x, _y, '#');
+            }
+        }
+        this->_rooms.push_back(room);
+    }
+
     //TODO monster spawning, this random count probably isn't great
     //this->_monsterCount = (rand() % (this->_sizeX * this->_sizeY) / 30) + 10;
     //this->_monsters = new Monster[this->_monsterCount];
@@ -65,6 +80,13 @@ void Dungeon::Display() {
         if (m->health > 0) {
             mvaddch(m->y, m->x, m->displayChar);
         }
+    }
+
+    //TODO temporary
+    // Display Rooms
+    for (unsigned int i = 0; i < this->_rooms.size(); i++) {
+        Room& r = this->_rooms[i];
+        mvprintw(this->_sizeY + i + 1, 0, "x: %d, y: %d, w: %d, h: %d", r.x, r.y, r.w, r.h);
     }
 
     // move cursor out of the way

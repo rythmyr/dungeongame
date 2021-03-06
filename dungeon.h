@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 struct DirectionPair {
     char x, y;
 };
@@ -18,6 +20,13 @@ struct Monster {
     Monster() {};
 };
 
+struct Room {
+    int x = 0;
+    int y = 0;
+    int w = 0;
+    int h = 0;
+};
+
 class Dungeon {
 private:
     char* _map = nullptr;
@@ -29,6 +38,8 @@ private:
 
     Monster* _monsters = nullptr;
     int _monsterCount = 0;
+
+    std::vector<Room> _rooms = std::vector<Room>();
 public:
     Dungeon();
     ~Dungeon();
