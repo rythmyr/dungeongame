@@ -29,8 +29,8 @@ void Dungeon::Generate(int x, int y) {
     for (int i = 0; i < 100; i ++) {
         bool skip = false;
         Room room;
-        room.w = rand() % 5 + 3;
-        room.h = rand() % 5 + 3;
+        room.w = rand() % 10 + 5;
+        room.h = rand() % 7 + 4;
         room.x = (rand() % (this->_sizeX - room.w - 4)) + 2;
         room.y = (rand() % (this->_sizeY - room.h - 4)) + 2;
 
@@ -39,14 +39,22 @@ void Dungeon::Generate(int x, int y) {
                 skip = true;
             }
         }
-        if (skip) {continue;}
+
+        if (skip) {
+            continue;
+        }
+
         for (int _x = room.x; _x < room.x + room.w; _x++) {
             for (int _y = room.y; _y < room.y + room.h; _y++) {
                 this->SetTile(_x, _y, '.');
             }
         }
+
         this->_rooms.push_back(room);
     }
+
+    //TODO connect rooms
+    this->ConnectAllRooms();
 
     Room startRoom = this->_rooms[0];
 
@@ -63,6 +71,14 @@ void Dungeon::Generate(int x, int y) {
     //    m->y = (rand() % (this->_sizeY - 2)) + 1;
     //    m->health = rand() % 15 + 15;
     //}
+}
+
+void Dungeon::ConnectAllRooms() {
+    const std::vector<Room> rooms = this->_rooms;
+}
+
+void Dungeon::ConnectRooms(const Room& r1, const Room& r2) {
+
 }
 
 void Dungeon::Display() {

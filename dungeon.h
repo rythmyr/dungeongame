@@ -57,6 +57,9 @@ private:
     int _monsterCount = 0;
 
     std::vector<Room> _rooms = std::vector<Room>();
+
+    void ConnectAllRooms();
+    void ConnectRooms(const Room &r1, const Room &r2);
 public:
     Dungeon();
     ~Dungeon();
